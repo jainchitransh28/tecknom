@@ -1,0 +1,315 @@
+<style>
+    .technology_wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.top_spacing | append: 'px' }};
+      padding-bottom: {{ section.settings.bottom_spacing | append: 'px' }};
+      position: relative;
+    }
+
+    .technology_wrapper-{{ section.id }} img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .technology-section img {
+      height: 100vh;
+    }
+
+    .technology_inner {
+      position: absolute;
+      max-width: 150rem;
+      width: calc(100% - 10rem);
+      height: 100%;
+      top: 0;
+      display: block;
+    }
+
+    .tech_text {
+      position: absolute;
+      max-width: 50rem;
+    }
+
+    .tt-{{ section.id }} {
+       {% if section.settings.alignment == 'top_left' %}
+         top: 10rem;
+       {% elsif section.settings.alignment == 'middle_left' %}
+         top: 50%;
+         transform: translateY(-50%);
+       {% elsif section.settings.alignment == 'bottom_left' %}
+         bottom: 10rem;
+       {% elsif section.settings.alignment == 'top_center' %}
+         top: 10rem;
+         left: 50%;
+         transform: translateX(-50%);
+         text-align: center;
+       {% elsif section.settings.alignment == 'middle_center' %}
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%,-50%);
+         text-align: center;
+       {% elsif section.settings.alignment == 'bottom_center' %}
+         bottom: 10rem;
+         left: 50%;
+         transform: translateX(-50%);
+         text-align: center;
+       {% elsif section.settings.alignment == 'top_right' %}
+         top: 10rem;
+         right: 0;
+       {% elsif section.settings.alignment == 'middle_right' %}
+         top: 50%;
+         right: 0;
+         transform: translateY(-50%);
+       {% elsif section.settings.alignment == 'bottom_right' %}
+         bottom: 10rem;
+         right: 0;
+       {% endif %}
+    }
+
+    .technology_inner .tech_text h3 {
+      margin-top: 0;
+      font-family: 'Futura LT';
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .technology_inner .tech_text p {
+      font-family: 'Futura BT';
+    }
+
+    .tt-{{ section.id }} h3, .tt-{{ section.id }} p {
+      color: {{ section.settings.color }};
+    }
+
+    @media screen and (max-width: 768px) {
+      .technology_inner { width: calc(100% - 6rem); }
+
+      .tt-{{ section.id }} {
+       {% if section.settings.mob_alignment == 'top_left' %}
+         top: 10rem;
+         bottom: unset;
+       {% elsif section.settings.mob_alignment == 'middle_left' %}
+         top: 50%;
+         transform: translateY(-50%);
+       {% elsif section.settings.mob_alignment == 'bottom_left' %}
+         top: unset;
+         bottom: 10rem;
+       {% elsif section.settings.mob_alignment == 'top_center' %}
+         top: 10rem;
+         bottom: unset;
+         left: 50%;
+         transform: translateX(-50%);
+         text-align: center;
+       {% elsif section.settings.mob_alignment == 'middle_center' %}
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%,-50%);
+         text-align: center;
+       {% elsif section.settings.mob_alignment == 'bottom_center' %}
+         top: unset;
+         bottom: 10rem;
+         left: 50%;
+         transform: translateX(-50%);
+         text-align: center;
+       {% elsif section.settings.mob_alignment == 'top_right' %}
+         top: 10rem;
+         bottom: unset;
+         right: 0;
+         text-align: right;
+       {% elsif section.settings.mob_alignment == 'middle_right' %}
+         top: 50%;
+         right: 0;
+         transform: translateY(-50%);
+         text-align: right;
+       {% elsif section.settings.mob_alignment == 'bottom_right' %}
+         top: unset;
+         bottom: 10rem;
+         right: 0;
+         text-align: right;
+       {% endif %}
+      }
+
+      .tech_text { width: 100%; }
+
+      .tt-{{ section.id }} h3, .tt-{{ section.id }} p { color: {{ section.settings.mob_color }}; }
+    }
+
+    @media screen and (max-width: 640px) {
+      .technology_inner { width: calc(100% - 4rem); }
+
+      .technology_wrapper-{{ section.id }} img { height: 80vh; }
+
+  /*     .technology_inner h3, .technology_inner p { color: #fff !important; } */
+    }
+</style>
+
+<div class="technology_wrapper-{{ section.id }}">
+  {% if section.settings.img != blank %}
+    <img src="{{ section.settings.img | img_url: '1920x' }}">
+  {% endif %}
+  <div class="page-width">
+    <div class="technology_inner ti-{{ section.id }}">
+      <div class="tech_text tt-{{ section.id }}">
+        <h3>{{ section.settings.head }}</h3>
+        <p>{{ section.settings.text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Technology Section",
+  "class": "technology-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Select Image"
+    },
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Desktop Text Alignment",
+      "options": [
+        {
+          "value": "top_left",
+          "label": "Top Left"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle Left"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top Center"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle Center"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top Right"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle Right"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "top_left"
+    },
+    {
+      "type": "select",
+      "id": "mob_alignment",
+      "label": "Mobile Text Alignment",
+      "options": [
+        {
+          "value": "top_left",
+          "label": "Top Left"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle Left"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top Center"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle Center"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top Right"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle Right"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "top_left"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Desktop Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "mob_color",
+      "label": "Mobile Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_spacing",
+      "label": "Top Spacing",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "bottom_spacing",
+      "label": "Bottom Spacing",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Technology Section",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

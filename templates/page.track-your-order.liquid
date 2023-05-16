@@ -1,0 +1,27 @@
+<style>
+  .track_main_wrapper {
+    padding: 6rem 5rem;
+    max-width: 1800px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 300px 1fr; 
+    align-items: flex-start;
+}
+  
+  @media screen and (max-width: 768px) {
+    .track_main_wrapper { padding: 6rem 3rem; grid-template-columns: 250px 1fr; }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .track_main_wrapper { grid-template-columns: 1fr; gap: 0;  padding: 3rem; padding-bottom: 5rem; }
+    
+    .track_main_wrapper.gap { gap: 5rem; }
+  }
+</style>
+
+{% section 'custom-banner-track' %}
+
+<div class="track_main_wrapper">
+  {% section 'left-section' %}
+  {% section 'track-order-section' %}
+</div>

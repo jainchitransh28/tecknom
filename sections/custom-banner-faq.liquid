@@ -1,0 +1,125 @@
+<style>
+  .custom_banner_faq_inner {
+    position: relative;
+    display: flex;
+}
+  
+  .custom_banner_faq_inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+  
+  .custom_banner_faq_title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: max-content;
+}
+.custom_banner_faq_title h1 {
+    letter-spacing: 7px;
+    color: #ffffff;
+    font-weight: 300;
+    font-family: "Futura BT";
+    text-transform: uppercase;
+    margin: 0;
+    width: 100%;
+}
+  
+  .search_form_wrapper {
+    max-width: 500px;
+    max-height: 55px;
+    height: 55px;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    margin-top: 3rem !important;
+  }
+
+  .search_form_wrapper input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e4e4e4;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Futura BT";
+    padding-left: 2rem;
+  }
+  
+  .search_form_wrapper input:placeholder {
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Futura BT";
+  }
+  
+  input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
+    display: none !important;
+}
+
+  .faq_search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+    display: flex;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .custom_banner_faq_inner img { height: 60vh; object-fit: cover; }
+    
+    .custom_banner_faq_title { width: 90%; text-align: center; }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .custom_banner_faq_title h1 { font-size: 26px; }
+    
+    .search_form_wrapper { max-height: 45px; }
+  }
+</style>
+
+<div class="custom_banner_faq_wrapper">
+  <div class="custom_banner_faq_inner">
+    {% if section.settings.img != blank %}
+    <img src="{{ section.settings.img | img_url: '1296x' }}"/>
+    {% endif %}
+    {% if section.settings.title != blank %}
+    <div class="custom_banner_faq_title">
+      <h1>{{ section.settings.title  }}</h1>
+      <div class="search_form_wrapper">
+        <input type="search" id="faq_search" placeholder="Search Questions..."/>
+        <div class="faq_search">{% render 'search' %}</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Custom Banner FAQ",
+"class": "custom_banner_faq_section",
+"settings": [
+{
+"type" : "image_picker",
+"id" : "img",
+"label" : "Select Image"
+},
+{
+"type" : "text",
+"id" : "title",
+"label" : "Enter Page Title"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

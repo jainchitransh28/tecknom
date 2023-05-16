@@ -1,0 +1,311 @@
+<style>
+  .left_inner ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .left_inner ul li a {
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 34px;
+    {% if request.path contains '/pages/contact' %}
+      color: #fff;
+    {% else %}
+      color: #818d99;
+    {% endif %}
+    font-weight: 300;
+    font-family: "Futura BT";
+    text-decoration: none;
+  }
+
+  .get_in_touch_wrapper {
+    display: none;
+    margin-top: 3rem;
+  }
+
+  .get_in_touch_inner,
+  .get_in_touch_nmbr {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .get_in_touch_inner span,
+  .get_in_touch_nmbr span {
+    margin-right: 0.8rem;
+  }
+
+  .get_in_touch_inner h3,
+  .get_in_touch_nmbr h3 {
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 32px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Futura BT";
+    margin: 0.5rem 0;
+  }
+
+  .chat_with_us_wrapper {
+    width: 20rem;
+    height: 4.5rem;
+    margin-top: 2.8rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 4rem;
+    position: relative;
+  }
+
+  .chat_img {
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff !important;
+    border-radius: 50%;
+    border: 3px solid #000;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+  }
+
+  .chat_img svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    top: 1px;
+  }
+
+  .chat_img a {
+    display: flex;
+  }
+
+  .chat_btn {
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    height: 100%;
+    transition: all .3s;
+    border-radius: 0 4rem 4rem 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .chat_btn a {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-family: "Futura LT";
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s;
+  }
+
+  .chat_btn:hover {
+    background: #1b1b1b;
+  }
+
+  .show_links {
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .show_links h3 {
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 34px;
+  /*       color: #000; */
+    color: #fff;
+    font-weight: 300;
+    font-family: "Futura BT";
+    text-transform: uppercase;
+  }
+
+  .show_links span {
+    margin-left: 10px;
+    position: relative;
+    top: -2px;
+  /*         color: #818d99; */
+    color: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    .chat_with_us_wrapper { width: 200px; height: 45px; }
+
+    .chat_btn a { font-size: 14px; }
+  }
+
+  @media screen and (max-width: 640px) {
+    .show_links { display: flex; }
+
+    .left_inner { display: none; margin-bottom: 2rem; }
+  }
+</style>
+
+<div class="left_wrapper">
+  <div class="show_links">
+    <h3>Show Links</h3>
+    <span class="fa fa-filter"></span>
+  </div>
+  <div class="left_inner">
+    <ul>
+      {% for block in section.blocks %}
+        <li>
+          <a class="{{ block.settings.title | downcase | replace: ' ', '-' }}" href="{{ block.settings.link }}">
+            {{- block.settings.title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="get_in_touch_wrapper">
+      <div class="get_in_touch_inner">
+        {% if section.settings.show_icon -%}
+          <span><img src="{{ 'Mail.png' | asset_img_url: '17x11'  }}"></span>
+        {%- endif %}
+        <h3>Get In Touch</h3>
+      </div>
+      {% if section.settings.nmbr != blank %}
+        <div class="get_in_touch_nmbr">
+          {% if section.settings.show_icon -%}
+            <span><img src="{{ 'Call.png' | asset_img_url: '13x12'  }}"></span>
+          {%- endif %}
+          <h3>{{ section.settings.nmbr }}</h3>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="chat_with_us_wrapper">
+      <div class="chat_img">
+        <a href="{{ section.settings.chat }}">{% render 'chat' %}</a>
+      </div>
+      <div class="chat_btn"><a href="{{ section.settings.chat }}">Chat With Us</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.chat_btn').mouseenter(function(){
+    $('.chat_img').css('background','#000');
+  })
+
+  $('.chat_btn').mouseleave(function(){
+    $('.chat_img').css('background','#1b1b1b');
+  })
+
+  $('.chat_btn').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+  $('.chat_img').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+  $('.track-your-order').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+   $('.services').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+  $('.exchange-form').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+  $('.return-form').click(function(e){
+    e.preventDefault();
+    GorgiasChat.open();
+  })
+
+  $('.left_inner').children('ul').children('li').map(function(){
+    $(this).children('a').click(function(e){
+      var v = $(this).attr('class');
+      console.log(v);
+      if(v == 'store-locator') {
+        e.preventDefault();
+        $('html, body').animate({
+            scrollTop: $('#store_locator').offset().top - 100 //#DIV_ID is an example. Use the id of your destination on the page
+         });
+        return false;
+      }
+    })
+  })
+</script>
+
+{% schema %}
+{
+"name": "Left Section",
+"class": "left_section",
+"settings": [
+{
+"type" : "checkbox",
+"id" : "show_icon",
+"label" : "Show Icon",
+"default" : true
+},
+{
+"type" : "text",
+"id" : "nmbr",
+"label" : "Phone Number",
+"default" : "03048250124"
+},
+{
+"type" : "header",
+"content" : "Chat Button"
+},
+{
+"type" : "url",
+"id" : "chat",
+"label" : "Chat Button Link"
+}
+],
+"blocks": [
+{
+"name" : "Link",
+"type" : "text",
+"settings" : [
+{
+"type" : "text",
+"id" : "title",
+"label" : "Title"
+},
+{
+"type" : "url",
+"id" : "link",
+"label" : "Link"
+}
+]
+}
+],
+"presets": [
+{
+"name" : "Left Section",
+"category" : "text"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

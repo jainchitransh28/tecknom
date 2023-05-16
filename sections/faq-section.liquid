@@ -1,0 +1,340 @@
+<style>
+  div#shopify-section-faq-section {
+    max-width: 100%;    
+    width: 80%;
+    margin-left: 5rem;
+}
+
+  .faq_block {
+    margin-top: 5.3rem;
+  }
+
+  .faq_block:first-child {
+    margin-top: 0;
+  }
+
+  .faq_head {
+    margin-bottom: 2.7rem;
+  } 
+
+  .faq_head h2 {
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 42px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Futura BT";
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .faq_head span {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Futura BT";
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 1.2rem;
+    cursor: pointer;
+  }
+
+  .faq_head span i {
+    font-size: 8px;
+    position: relative;
+    top: -1px;
+    left: 2px;
+    opacity: 0.7;
+    transition: all .3s;
+  }
+
+  .faq_head span:hover > i {
+    transform: translateX(3px);
+  }
+
+  .faq_question {
+    cursor: pointer;
+  }  
+
+  .faq_question {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq_head + .faq_content > .faq_question {
+    border-top: 1px solid #d4d4d4;
+  }
+
+  .faq_question h3 {
+    font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 42px;
+    color: #818d99;
+    font-weight: 300;
+    font-family: "Futura BT";
+    margin: 0;
+  }
+
+  .faq_answer {
+    display: none;
+    padding-bottom: 1.5rem;
+  }
+
+  .faq_answer p {
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 32px;
+    color: #818d99;
+    font-weight: 300;
+    font-family: "Futura BT";
+    margin: 0;
+  }
+
+  .faq_question span {
+    font-size: 11px;
+    color: #404040;
+  }
+  
+  {% for block in section.blocks %}
+  {% if block.settings.max_questions == 1 %}
+  .content2-{{ block.id }}, .content3-{{ block.id }}, .content4-{{ block.id }}, .content5-{{ block.id }} { display: none; }
+  {% elsif block.settings.max_questions == 2 %}
+  .content3-{{ block.id }}, .content4-{{ block.id }}, .content5-{{ block.id }} { display: none; }
+  {% elsif block.settings.max_questions == 3 %}
+  .content4-{{ block.id }}, .content5-{{ block.id }} { display: none; }
+  {% elsif block.settings.max_questions == 4 %}
+  .content5-{{ block.id }} { display: none; }
+  {% endif %}
+  {% endfor %}
+  
+  .faq_content.disp { display: block; }
+
+  @media screen and (min-width: 1800px) {
+    div#shopify-section-faq-section { width: 92.6rem; margin-left: 10rem; }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    div#shopify-section-faq-section { width: 80%; }
+  }
+  
+   @media screen and (max-width: 768px) {
+    div#shopify-section-faq-section { width: 90%; margin-left: 0; }
+  }
+  
+  @media screen and (max-width: 640px) {
+    div#shopify-section-faq-section { width: 100%; }   
+  }
+</style>
+
+<div class="faq_wrapper">
+  <div class="faq_inner">
+    {% for block in section.blocks %}
+    <div class="faq_block">
+      <div class="faq_head">
+        <h2>{{ block.settings.head }}</h2>
+        <span>View All <i class="fa fa-chevron-right"></i></span>
+      </div>
+      <div class="faq_content content1-{{ block.id }}">
+        {% if block.settings.question1 != blank %}
+        <div class="faq_question">
+          <h3>{{ block.settings.question1 }}</h3>
+          <span class="fa fa-plus"></span>
+        </div>
+        {% endif %}
+
+        {% if block.settings.answer1 != blank %}
+        <div class="faq_answer">{{ block.settings.answer1 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="faq_content content2-{{ block.id }}">
+        {% if block.settings.question2 != blank %}
+        <div class="faq_question">
+          <h3>{{ block.settings.question2 }}</h3>
+          <span class="fa fa-plus"></span>
+        </div>
+        {% endif %}
+
+        {% if block.settings.answer2 != blank %}
+        <div class="faq_answer">{{ block.settings.answer2 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="faq_content content3-{{ block.id }}">
+        {% if block.settings.question3 != blank %}
+        <div class="faq_question">
+          <h3>{{ block.settings.question3 }}</h3>
+          <span class="fa fa-plus"></span>
+        </div>
+        {% endif %}
+
+        {% if block.settings.answer3 != blank %}
+        <div class="faq_answer">{{ block.settings.answer3 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="faq_content content4-{{ block.id }}">
+        {% if block.settings.question4 != blank %}
+        <div class="faq_question">
+          <h3>{{ block.settings.question4 }}</h3>
+          <span class="fa fa-plus"></span>
+        </div>
+        {% endif %}
+
+        {% if block.settings.answer4 != blank %}
+        <div class="faq_answer">{{ block.settings.answer4 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="faq_content content5-{{ block.id }}">
+        {% if block.settings.question5 != blank %}
+        <div class="faq_question">
+          <h3>{{ block.settings.question5 }}</h3>
+          <span class="fa fa-plus"></span>
+        </div>
+        {% endif %}
+
+        {% if block.settings.answer5 != blank %}
+        <div class="faq_answer">{{ block.settings.answer5 }}</div>
+        {% endif %}
+      </div>
+
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<script>
+  $('.faq_question').click(function(){
+    $(this).siblings('.faq_answer').slideToggle().parent().siblings().children('.faq_answer').slideUp();
+    $(this).children('span').toggleClass('fa fa-minus').toggleClass('fa fa-plus').parent().parent().siblings().children().children('span').removeClass('fa-minus').addClass('fa-plus');
+  })
+  
+  $('.faq_head').children('span').click(function(){
+    $(this).parent().siblings('.faq_content').toggleClass('disp');
+    var v = $(this).html();
+  	console.log(v);
+    if(v == 'View All <i class="fa fa-chevron-right"></i>'){
+    $(this).html('View Less <i class="fa fa-chevron-right"></i>')
+    } else {
+      $(this).html('View All <i class="fa fa-chevron-right"></i>');
+    }
+  })
+  
+  $('.show_links').click(function(){
+    $('.left_inner').slideToggle();    
+    $('.faq_main_wrapper').toggleClass('gap');
+  })
+  
+   $('input[type="search"]').on('input',function(){
+    var v = $(this).val();
+     var s = v.toLowerCase();
+     $('.faq_question').map(function(){
+       var question = $(this).children('h3').text();
+       var questions = question.toLowerCase();
+       if(questions.includes(s)) {
+         $(this).css('display','flex');
+       } else {         
+         $(this).css('display','none');
+       }
+     })
+  })
+</script>
+
+{% schema %}
+{
+"name": "FAQs",
+"class": "faq_section",
+"settings": [],
+"blocks": [
+{
+"type" : "text",
+"name" : "FAQ Block",
+"settings" : [
+{
+"type" : "text",
+"id" : "head",
+"label" : "FAQ Heading"
+},
+{
+"type" : "range",
+"id" : "max_questions",
+"label" : "Display Max. Questions",
+"min" : 1,
+"max" : 5,
+"step" : 1,
+"default" : 3
+},
+{
+"type" : "header",
+"content" : "Questions & Answers"
+},
+{
+"type" : "textarea",
+"id" : "question1",
+"label" : "Question1"
+},
+{
+"type" : "richtext",
+"id" : "answer1",
+"label" : "Answer1"
+},
+{
+"type" : "textarea",
+"id" : "question2",
+"label" : "Question2"
+},
+{
+"type" : "richtext",
+"id" : "answer2",
+"label" : "Answer2"
+},
+{
+"type" : "textarea",
+"id" : "question3",
+"label" : "Question3"
+},
+{
+"type" : "richtext",
+"id" : "answer3",
+"label" : "Answer3"
+},
+{
+"type" : "textarea",
+"id" : "question4",
+"label" : "Question4"
+},
+{
+"type" : "richtext",
+"id" : "answer4",
+"label" : "Answer4"
+},
+{
+"type" : "textarea",
+"id" : "question5",
+"label" : "Question5"
+},
+{
+"type" : "richtext",
+"id" : "answer5",
+"label" : "Answer5"
+}
+]
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,227 @@
+<style>
+    div#cokePo {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+  /*     transform: translate(-50%,-50%); */
+      width: 100%;
+      height: auto;
+      {% if settings.cookie_bg != blank %}
+      background: url({{ settings.cookie_bg | img_url: '900x400' }});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      {% else %}
+      background: #fff;
+      {% endif %}
+      z-index: 9999999999;
+      display: none;
+      transition: all .3s;
+    }
+
+    .cookie_logo {
+      text-align: center;
+      padding: 3rem 0 0;
+    }
+
+    .cookie_close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    #cokePo.close {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    div#cokePo h4 {
+      display: none;
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: #fff;
+      font-family: "Futura LT";
+      text-align: center;
+      text-transform: uppercase;
+      margin: 5px 0 0;
+    }
+
+    .cookie_w {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 95%;
+      margin: auto;
+    }
+
+    div#cokePo p {
+      font-size: 16px;
+      letter-spacing: 0px;
+      line-height: 36px;
+      /*     color: #818d99; */
+      color: #fff;
+      font-family: "Futura LT";
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .cookie_btns {
+      text-align: center;
+    }
+
+    button#acceptCoke {
+      width: 140px;
+      height: 40px;
+      background-color: #000000;
+      border: 0px solid #bbbbbb;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #ffffff;
+      font-family: "Futura LT";
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-right: 0.9rem;
+    }
+
+    button#rejectCoke {
+      width: 140px;
+      height: 40px;
+      background-color: #eeeeee;
+      border: 0px solid #bbbbbb;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #000000;
+      font-family: "Futura LT";
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .coke_overlay {
+      display: block !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.2);
+      z-index: -1;
+    }
+
+    .expiry, .period { display: none; }
+
+    @media screen and (max-width: 950px) {
+      div#cokePo { width: 40rem; height: auto; padding-bottom: 5rem; }
+
+      .cookie_w { flex-direction: column; }
+    }
+
+    @media screen and (max-width: 640px) {
+      div#cokePo { width: 100%; padding-bottom: 2rem; }
+
+      div#cokePo h4 { margin: 2rem; font-size: 32px; }
+
+      div#cokePo p { padding: 0 1rem; font-size: 14px; line-height: 22px; }
+    }
+</style>
+<div id="cokePo">
+  <div class="coke_overlay"></div>
+  {% if settings.cookie_logo != blank %}
+    <div class="cookie_logo">
+      <img src="{{ settings.cookie_logo | img_url: '261x42' }}">
+    </div>
+  {% endif %}
+  <div class="cookie_close"><img src="{{ 'Close.png' | asset_img_url: '12x13' }}"></div>
+  <h4>Cookies</h4>
+  <p class="expiry">{{ settings.expiry }}</p>
+  <p class="period">{{ settings.period }}</p>
+  <div class="cookie_w">
+    <p>
+      By clicking on "Accept all cookies", you agree to the use of cookies essential to the functioning of site, for the
+      purposes of customization, statistics and targeted advertising, including third-party cookies.
+    </p>
+    <div class="cookie_btns">
+      <button id="acceptCoke">Accept All</button>
+      <button id="rejectCoke">Reject All</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // set cookie according to you
+  var cookieName= "_cookie_consent";
+  var cookieValue="true";
+  var cookieExpireDays= document.querySelector('.expiry').innerHTML;
+
+  // when users click accept button
+  let acceptCookie= document.getElementById("acceptCoke");
+  acceptCookie.onclick= function(){
+    createCookie(cookieName, cookieValue, cookieExpireDays);
+  }
+
+
+  // function to set cookie in web browser
+  let createCookie= function(cookieName, cookieValue, cookieExpireDays){
+    let currentDate = new Date();
+    currentDate.setTime(currentDate.getTime() + (cookieExpireDays*24*60*60*1000));
+    let expires = "expires=" + currentDate.toGMTString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+    if(document.cookie){
+      document.getElementById("cokePo").style.display = "none";
+    }else{
+      alert("Unable to set cookie. Please allow all cookies site from cookie setting of your browser");
+    }
+  }
+  // get cookie from the web browser
+  let getCookie= function(cookieName){
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  // check cookie is set or not
+  let checkCookie= function(){
+    let check=getCookie(cookieName);
+    if(check==""){
+      document.getElementById("cokePo").style.display = "block";
+      // document.getElementById('shopify-section-announcement-bar').style.display = 'block';
+    }else{
+
+      document.getElementById("cokePo").style.display = "none";
+      // document.getElementById('shopify-section-announcement-bar').style.display = 'none';
+    }
+  }
+
+  var period = document.querySelector('.period').innerHTML;
+  var p = parseInt(period);
+  var s = p * 1000;
+  // checkCookie();
+  setTimeout(checkCookie,s);
+
+
+
+  $('.cookie_close').click(function(){
+    $('#cokePo').addClass('close');
+  })
+
+  $('#rejectCoke').click(function(){
+    $('#cokePo').addClass('close');
+  })
+</script>

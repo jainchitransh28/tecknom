@@ -1,0 +1,40 @@
+{% for block in section.blocks %}
+<div class="custom_nav_link_wrapper">
+  <a class="custom_nav_link" href="{{ block.settings.main_url }}"><span>{{ block.settings.main_head }}</span></a>
+  <div class="custom_sub_menu">
+    <div class="cus_overlay"></div>
+	{% if block.settings.menu != blank %}
+    <ul>
+    {% for link in block.settings.menu.links %}
+      <li class="{% if forloop.first%}f{% endif %}">
+        <a class="{% if forloop.first%}firstt{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+        <div class="custom_menu_products">
+          {% assign coll = link.title | downcase | replace: ' ', '-' | replace: '-&', '' %}         
+          {% for product in collections[coll].products limit: 4 %}
+          <div class="pro_block">
+            <a href="{{ collections[coll].url }}"><img src="{{ product.featured_image | img_url: '500x' }}"/></a>
+            <h3><a href="{{ collections[coll].url }}">{{ product.title }}</a></h3>
+          </div>
+          {% endfor %}
+          <div class="view_all_coll">
+            {% if block.settings.main_head == 'Luggage' %}
+            <a href="/pages/luggage">View All Collections</a>
+            {% elsif block.settings.main_head == 'Bags' %}
+            <a href="/pages/bags">View All Collections</a>
+            {% elsif block.settings.main_head == 'Cases' %}
+            <a href="/pages/cases">View All Collections</a>
+            {% elsif block.settings.main_head == 'Collaborations' %}
+            <a href="/pages/collaborations">View All Collections</a>
+            {% elsif block.settings.main_head == 'Accessories' %}
+            <a href="/pages/accessories">View All Collections</a>
+            {% endif %}
+          </div>
+          
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
