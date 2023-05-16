@@ -1,0 +1,35 @@
+<link rel="preload" href="{{ 'FuturaLT.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ 'FuturaBT-Light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+    font-family: 'Futura LT';
+    src: url("{{ 'FuturaLT.woff2' | asset_url }}") format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Futura BT';
+    src: url("{{ 'FuturaBT-Light.woff2' | asset_url }}") format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FontAwesome';
+    src: url("data:application/octet-stream;base64,d09GMgABAAAAAAJgAA0AAAAABfwAAAIJAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0cGiQGVgCCShEICoEsgR8LDAABNgIkAxQEIAWDNgczG/0EAJ4Fucm6mnCYWmn5Wr88QunV8iE+Hr5fez33LQSKBBLZfdtKAFTVjY3O+JIkC6gAcCGKbS14I1SGkk1CtKYHvHkqX6oFQP4DZ07d1Ob5CzQA8Kc1NMAFtMHCACNY1mVtsAQWeJYmjPnz4nu5thby62DMxSwEPFjdR3h28rVot4LW6E2ShPA5lqEkRH4oLinU5+fy5/CbD5dt0cZdAIBoD4AVtWIixsd/qaKp5NAhAciQoXeAxTSB3rnhlHIh8fFfAf3uiXZrKABREoBISACAYHaJCgkUoBEFhrIQIAcJJJFTtuv6Nntb79rr7MZn7P0Mn/JD09+NZ0ZWzZHVmsf9Wu09+/S0ov/VuuKS0hUlXnd9y337LVc+H9ndbN2rY8Xr+VxfW1+OXIGRIBDUOm86ut2Z/c1uVWdL6n2tDhnnSkA9QFipOkRTcagHV20UAIAiO2QnSGtRx70PQEGhawIJITAfgNYuCxBa6R4gqTM5QGbYOQFyrdwSoNDKR3ClE50BRN7AdWVQkrYGK5llfCXXtYUv5Ht8ufkvpZOju8SLuDk5ECzdcbwnLzla+mEVsXjY613xFZnNeFx+9NVCuBPHju8/s//8rD2YMGVMDiaONyatC3Hzuog7cez4/jP7x4E8zoQpYyy+gfOLm18XXN1sEl4Tx2Z6KpWfMHa8uQokprVASEQqj0IAAAA=") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+{% if template contains 'page' or template contains 'collection' %} 
+ @font-face {
+    font-family: 'Futura BT';
+    src: url("{{ 'FuturaBT.woff2' | asset_url }}") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}           
+
+{% endif %} 
+</style>

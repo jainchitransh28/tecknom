@@ -136,10 +136,10 @@
   <div class="coke_overlay"></div>
   {% if settings.cookie_logo != blank %}
     <div class="cookie_logo">
-      <img src="{{ settings.cookie_logo | img_url: '261x42' }}">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ settings.cookie_logo | img_url: '261x42' }}">
     </div>
   {% endif %}
-  <div class="cookie_close"><img src="{{ 'Close.png' | asset_img_url: '12x13' }}"></div>
+  <div class="cookie_close"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ 'Close.png' | asset_img_url: '12x13' }}"></div>
   <h4>Cookies</h4>
   <p class="expiry">{{ settings.expiry }}</p>
   <p class="period">{{ settings.period }}</p>
@@ -155,7 +155,7 @@
   </div>
 </div>
 
-<script type="text/javascript">
+<script type="lazyload_int">
   // set cookie according to you
   var cookieName= "_cookie_consent";
   var cookieValue="true";

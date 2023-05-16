@@ -98,7 +98,7 @@
     {% for block in section.blocks %}
       <div class="custom_slide swiper-slide">
         {% if block.settings.img != blank %}
-          <img src="{{ block.settings.img | img_url: '1920x' }}">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="{{ block.settings.img | img_url: '1920x' }}">
         {% endif %}
 
         <div class="custom_slide_info">
@@ -119,7 +119,7 @@
   <div class="swiper-button-prev"></div>
 </div>
 
-<script>
+<script type="lazyload_int">
   var slides = new Swiper('.custom_slideshow_wrapper-{{ section.id }}',{
     slidesPerView: 1,
     speed: 1000,
@@ -189,8 +189,4 @@
 }
 {% endschema %}
 
-{% stylesheet %}
-{% endstylesheet %}
 
-{% javascript %}
-{% endjavascript %}

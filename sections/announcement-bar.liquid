@@ -79,8 +79,8 @@
 {%- endcase -%}
 {%- endfor -%}
 
-<script>
-  $('document').ready(function(){    
+<script type="lazyload_int">
+  setTimeout(function(){    
      let a = getCookie('_cookie_consent');
       console.log(a)
       if(a) {
@@ -89,7 +89,7 @@
         $('#shopify-section-announcement-bar').css('display', 'block');
       }
    
-  })
+  },3000)
   
   $('.ann_close').click(function(){
     $('.announcement-bar').slideUp();
